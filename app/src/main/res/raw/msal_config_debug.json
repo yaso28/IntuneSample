@@ -1,0 +1,16 @@
+{
+  "client_id" : "800ef163-83ce-4947-94a6-68c5cd34ba7d",
+  "authorization_user_agent" : "DEFAULT",
+  "redirect_uri" : "msauth://com.yaso28.sample202506/WWKsWNmxHAoZi6dIqRlv0EEY%2B8s%3D",
+  "authorities" : [
+    {
+      "type": "AAD",
+      "audience": {
+        "type": "AzureADMyOrg",
+        "tenant_id": "35f40c45-fda4-4ccc-bc94-e96dab0c5c71"
+      }
+    }
+  ],
+  "account_mode": "SINGLE",
+  "broker_redirect_uri_registered": true
+}

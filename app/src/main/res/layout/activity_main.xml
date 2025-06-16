@@ -5,15 +5,69 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sign In" />
+
+        <Button
+            android:id="@+id/btnSignOut"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sign Out" />
+
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/txtUser"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="#5600BCD4"
+        android:gravity="center"
+        android:text="(GUEST)"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btnContainer" />
 
+    <ScrollView
+        android:id="@+id/scrollLog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#6BFFC107"
+        android:descendantFocusability="blocksDescendants"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUser"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/txtLog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#6BFFC107"
+            android:gravity="start|top"
+            android:isScrollContainer="false"
+            android:text="[Log]"
+            android:textSize="18sp" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
