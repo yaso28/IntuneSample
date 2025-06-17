@@ -173,6 +173,7 @@ MainActivity.kt（？）を編集して、下記コードを追加します。�
   - onCreate()の中で呼び出します。
 - sso()
 - signIn()
+- setAccount()
 - initMam()
   - onCreate()の中で呼び出します。
 - acquireTokenSilent()
