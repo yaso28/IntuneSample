@@ -26,6 +26,13 @@
             android:text="Sign In" />
 
         <Button
+            android:id="@+id/btnShowStatus"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Show Status" />
+
+        <Button
             android:id="@+id/btnSignOut"
             android:layout_width="0dp"
             android:layout_weight="1"

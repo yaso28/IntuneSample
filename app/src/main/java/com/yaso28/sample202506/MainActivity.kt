@@ -1,5 +1,6 @@
 package com.yaso28.sample202506
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -21,6 +22,7 @@ import com.microsoft.identity.client.PublicClientApplication.createSingleAccount
 import com.microsoft.identity.client.SignInParameters
 import com.microsoft.identity.client.exception.MsalException
 import com.microsoft.intune.mam.client.app.MAMComponents
+import com.microsoft.intune.mam.client.identity.MAMPolicyManager
 import com.microsoft.intune.mam.policy.MAMEnrollmentManager
 import com.microsoft.intune.mam.policy.MAMServiceAuthenticationCallback
 
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var btnSignIn: Button
     private lateinit var btnSignOut: Button
+    private lateinit var btnShowStatus: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +46,16 @@ class MainActivity : AppCompatActivity() {
         txtUser = findViewById(R.id.txtUser)
         txtLog = findViewById(R.id.txtLog)
         btnSignIn = findViewById(R.id.btnSignIn)
-        btnSignOut = findViewById(R.id.btnSignOut)
         btnSignIn.setOnClickListener{
             signIn()
         }
+        btnSignOut = findViewById(R.id.btnSignOut)
         btnSignOut.setOnClickListener {
             signOut()
+        }
+        btnShowStatus = findViewById(R.id.btnShowStatus)
+        btnShowStatus.setOnClickListener {
+            showStatus()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -185,6 +192,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setAccount(account: IAccount) {
         logInfo("setAccount", account.username)
+        logInfo("setAccount", account.id)
+        logInfo("setAccount", account.tenantId)
+        logInfo("setAccount", account.authority)
         mamEnrollmentManager.registerAccountForMAM(
             account.username,
             account.id,
@@ -209,6 +219,25 @@ class MainActivity : AppCompatActivity() {
 
         txtUser.text = "(GUEST)"
         currentAccount = null
+    }
+
+    private fun showStatus() {
+        MAMPolicyManager.showDiagnostics(applicationContext)
+
+        val account = currentAccount
+        if (account == null) {
+            logError("showStatus", "No Account")
+        } else {
+            val result = mamEnrollmentManager.getRegisteredAccountStatus(
+                account.username,
+                account.id
+            )
+            if (result == null) {
+                logError("showStatus", "No Result")
+            } else {
+                logInfo("showStatus", result.name)
+            }
+        }
     }
 
     private fun logInfo(tag: String, msg:String) {
